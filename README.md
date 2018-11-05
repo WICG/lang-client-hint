@@ -72,7 +72,6 @@ causing another navigation request, which will include the `Lang` header.
 ## Should we include the `q` weighting?
 
 The `Accept-Language` header includes a weighting mechanism (e.g. the `q=0.8` bits in the example
-above). It doesn't appear to me that that has any actual meaning, and I'll blithly assert that it
-can be removed without impact. Hopefully [Chesterton][3] won't mind.
-
-[3]: https://en.wikipedia.org/wiki/Wikipedia:Chesterton%27s_fence
+above). A potential application of that is expressing equal preference for two or more languages,
+but the challenge of exposing such an option to users (compared to an ordered list) seems to make
+practical use unlikely. I'll blithely assert that `q` weighting can be removed without impact.

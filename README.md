@@ -46,8 +46,8 @@ accomplish this as follows:
     Lang: "en-US", "en", "de"
     ```
 
-3.  Browsers should restrict the `navigator.languages` API to secure contexts, to match Client
-    Hints' scope.
+3.  Browsers should restrict the `navigator.language` and `navigator.languages` APIs to secure
+    contexts, to match Client Hints' scope.
 
 4.  Servers can opt-into the new `Lang` Client Hint by delivering an appropriate `Accept-CH`
     header in the usual way:

@@ -75,3 +75,12 @@ The `Accept-Language` header includes a weighting mechanism (e.g. the `q=0.8` bi
 above). A potential application of that is expressing equal preference for two or more languages,
 but the challenge of exposing such an option to users (compared to an ordered list) seems to make
 practical use unlikely. I'll blithely assert that `q` weighting can be removed without impact.
+
+## Wait a minute, I don't see this delegation stuff in the Client Hints spec...
+
+Right. There are more than a few open PRs:
+
+* Fetch integration of Accept-CH opt-in: [whatwg/fetch#773](whatwg/fetch#773)
+* HTML integration of Accept-CH-Lifetime and the ACHL cache: [whatwg/HTML#3774](https://github.com/whatwg/html/issues/3774)
+* Adding new CH features to the CH list in Fetch: [whatwg/fetch#725](https://github.com/whatwg/fetch/issues/725)
+* Other PRs for adding the Feature Policy 3rd party opt-in: [whatwg/fetch#811](https://github.com/whatwg/fetch/issues/811) and [wicg/feature-folicy#220](https://github.com/wicg/feature-policy/issues/220)

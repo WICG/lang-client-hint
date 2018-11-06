@@ -38,12 +38,12 @@ accomplish this as follows:
     to something genericly appropriate (perhaps based normal language preferences for the user's
     rough, IP-based geolocation), and eventually removing it entirely.
 
-2.  Browsers should introduce a new `Lang` Client Hint header field, representing the users'
+2.  Browsers should introduce a new `Sec-CH-Lang` header field, representing the users'
     language preferences. This would be a [Structured Header][2] whose value is a flat list of
     language codes in the users' preferred order. For example:
 
     ```http
-    Lang: "en-US", "en", "de"
+    Sec-CH-Lang: "en-US", "en", "de"
     ```
 
 3.  Browsers should restrict the `navigator.language` and `navigator.languages` APIs to secure
@@ -67,7 +67,7 @@ accomplish this as follows:
 
 If the server absolutely requires language information to make a reasonable decision about what
 data to send to the user, it can do so by sending an `Accept-CH` header along with a 302 response,
-causing another navigation request, which will include the `Lang` header.
+causing another navigation request, which will include the `Sec-CH-Lang` header.
 
 ## Should we include the `q` weighting?
 
@@ -84,3 +84,11 @@ Right. There are more than a few open PRs:
 * HTML integration of Accept-CH-Lifetime and the ACHL cache: [whatwg/HTML#3774](https://github.com/whatwg/html/issues/3774)
 * Adding new CH features to the CH list in Fetch: [whatwg/fetch#725](https://github.com/whatwg/fetch/issues/725)
 * Other PRs for adding the Feature Policy 3rd party opt-in: [whatwg/fetch#811](https://github.com/whatwg/fetch/issues/811) and [wicg/feature-folicy#220](https://github.com/wicg/feature-policy/issues/220)
+
+## What's with the `Sec-CH-` prefix?
+
+ Based on some discussion in [w3ctag/design-reviews#320](https://github.com/w3ctag/design-reviews/issues/320#issuecomment-435874298),
+it seems reasonable to forbid access to these headers from JavaScript, and demarcate them as
+browser-controlled client hints so they can be documented and included in requests without triggering
+CORS preflights. A `Sec-CH-` prefix seems like a viable approach. _This bit might shift as the broader
+Client Hints discussions above coalesce into something more solid that lands in specs_.

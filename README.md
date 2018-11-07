@@ -34,9 +34,10 @@ accomplish this as follows:
 [1]: https://tools.ietf.org/html/draft-ietf-httpbis-client-hints
 [2]: https://tools.ietf.org/html/draft-ietf-httpbis-header-structure
 
-1.  Browsers should deprecate the `Accept-Language` header over time, initially locking the string
-    to something genericly appropriate (perhaps based normal language preferences for the user's
-    rough, IP-based geolocation), and eventually removing it entirely.
+1.  Browsers should deprecate and eventually remove the `Accept-Language` header. In order to
+    quickly realize some privacy gains without a lot of compatibility impact, the header could be
+    locked to something genericly appropriate (perhaps based on typical language preferences for the
+    user's rough, IP-based geolocation) as an intermediate step.
 
 2.  Browsers should introduce a new `Sec-CH-Lang` header field, representing the users'
     language preferences. This would be a [Structured Header][2] whose value is a flat list of

@@ -193,6 +193,19 @@ triggering CORS preflights. A `Sec-CH-` prefix seems like a viable approach, but
 shift as the broader Client Hints discussions above coalesce into something more solid that lands
 in specs.
 
+## What about weight?
+
+The `Accept-Language` header includes an optional weight along with each listed language (e.g.
+`en;q=0.3` is less preferred than `de;q=0.9`). A potential application of that is expressing equal
+preference for two or more languages, but the challenge of exposing such an option to users
+(compared to an ordered list) seems to make practical use unlikely. Moreover, widely-used
+implementations of the `Accept-Language` header blindly assign weights in exactly this way
+(see Chromium's `HttpUtil::GenerateAcceptLanguageHeader`, and Firefox's
+`rust_prepare_accept_languages`).
+
+In this document, I'm boldly (foolishly?) asserting that `q` weighting can be removed without
+impact, in favor of assigning semantic meaning to the ordering of the items in the header list.
+
 # IANA Considerations
 
 This document intends to define the `Sec-CH-Lang` HTTP request header field, and to register it in

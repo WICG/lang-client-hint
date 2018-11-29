@@ -73,13 +73,14 @@ Table of Contents
    4.  Implementation Considerations . . . . . . . . . . . . . . . .   5
      4.1.  The 'Accept-Language' Header  . . . . . . . . . . . . . .   5
      4.2.  The 'Sec-CH-' prefix  . . . . . . . . . . . . . . . . . .   6
+     4.3.  What about weight?  . . . . . . . . . . . . . . . . . . .   6
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
      5.1.  'Sec-CH-Lang' Header Field  . . . . . . . . . . . . . . .   6
-     5.2.  'Accept-Language' Header Field  . . . . . . . . . . . . .   6
+     5.2.  'Accept-Language' Header Field  . . . . . . . . . . . . .   7
    6.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
-   Appendix A.  Changes  . . . . . . . . . . . . . . . . . . . . . .   7
-     A.1.  draft-west-ua-client-hints-00 . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Appendix A.  Changes  . . . . . . . . . . . . . . . . . . . . . .   8
+     A.1.  draft-west-ua-client-hints-00 . . . . . . . . . . . . . .   8
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -105,7 +106,6 @@ Table of Contents
 
    This document proposes a mechanism that might allow user agents to
    reduce the passive fingerprinting surface exposed by the "Accept-
-   Language" header by replacing it with a new "Sec-CH-Lang" Client Hint
 
 
 
@@ -114,6 +114,7 @@ West                      Expires June 2, 2019                  [Page 2]
 Internet-Draft           The 'Lang' Client Hint            November 2018
 
 
+   Language" header by replacing it with a new "Sec-CH-Lang" Client Hint
    ([I-D.ietf-httpbis-client-hints]) that servers can opt-into
    receiving.  Rather than broadcasting this information to everyone on
    the network, all the time, user agents can make reasonable decisions
@@ -160,8 +161,7 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
    about a user agent's language preferences.  It is a Structured Header
    ([I-D.ietf-httpbis-header-structure]) whose value MUST be a list
    ([I-D.ietf-httpbis-header-structure], Section 3.2).  Each item in the
-   list MUST be a string ([I-D.ietf-httpbis-header-structure],
-   Section 3.7).
+
 
 
 
@@ -169,6 +169,9 @@ West                      Expires June 2, 2019                  [Page 3]
 
 Internet-Draft           The 'Lang' Client Hint            November 2018
 
+
+   list MUST be a string ([I-D.ietf-httpbis-header-structure],
+   Section 3.7).
 
    The header's ABNF is:
 
@@ -215,9 +218,6 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
    preferences will not be leaked over plaintext channels, reducing the
    opportunity for network attackers to build a profile of a given
    agent's behavior over time.
-
-
-
 
 
 
@@ -293,6 +293,22 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
    discussions above coalesce into something more solid that lands in
    specs.
 
+4.3.  What about weight?
+
+   The "Accept-Language" header includes an optional weight along with
+   each listed language (e.g.  "en;q=0.3" is less preferred than
+   "de;q=0.9").  A potential application of that is expressing equal
+   preference for two or more languages, but the challenge of exposing
+   such an option to users (compared to an ordered list) seems to make
+   practical use unlikely.  Moreover, widely-used implementations of the
+   "Accept-Language" header blindly assign weights in exactly this way
+   (see Chromium's "HttpUtil::GenerateAcceptLanguageHeader", and
+   Firefox's "rust_prepare_accept_languages").
+
+   In this document, I'm boldly (foolishly?) asserting that "q"
+   weighting can be removed without impact, in favor of assigning
+   semantic meaning to the ordering of the items in the header list.
+
 5.  IANA Considerations
 
    This document intends to define the "Sec-CH-Lang" HTTP request header
@@ -313,6 +329,15 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
 
    Specification document:  this specification (Section 2.1)
 
+
+
+
+
+West                      Expires June 2, 2019                  [Page 6]
+
+Internet-Draft           The 'Lang' Client Hint            November 2018
+
+
 5.2.  'Accept-Language' Header Field
 
    Header field name:  Accept-Language
@@ -325,18 +350,6 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
 
    Specification document:  this specification (Section 4.1), and
       Section 5.3.5 of [RFC7231]
-
-
-
-
-
-
-
-
-West                      Expires June 2, 2019                  [Page 6]
-
-Internet-Draft           The 'Lang' Client Hint            November 2018
-
 
 6.  Normative References
 
@@ -372,6 +385,15 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+
+
+West                      Expires June 2, 2019                  [Page 7]
+
+Internet-Draft           The 'Lang' Client Hint            November 2018
+
+
 Appendix A.  Changes
 
 A.1.  draft-west-ua-client-hints-00
@@ -389,4 +411,38 @@ Author's Address
 
 
 
-West                      Expires June 2, 2019                  [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+West                      Expires June 2, 2019                  [Page 8]

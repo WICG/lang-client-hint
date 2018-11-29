@@ -344,7 +344,7 @@ Internet-Draft           The 'Lang' Client Hint            November 2018
 
    Applicable protocol:  http
 
-   Status:  standard
+   Status:  deprecated
 
    Author/Change controller:  IETF
 

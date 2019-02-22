@@ -171,7 +171,8 @@ passive fingerprinting.
 Language preferences expose quite a bit of entropy to the web. User agents ought to exercise
 judgement before granting access to this information, and MAY impose restrictions above and beyond
 the secure transport and delegation requirements noted above. For instance, user agents could choose
-to deliver the `Sec-CH-Lang` header only on navigation, but not on subresource requests. Likewise,
+to deliver the `Sec-CH-Lang` header only on navigation, but not on subresource requests. User agents
+SHOULD deliver the `Sec-CH-Lang` header when the user enters the url manually. Likewise,
 they could offer users control over the values revealed to servers, or gate access on explicit user
 interaction via a permission prompt or via a settings interface.
 
